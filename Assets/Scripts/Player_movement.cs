@@ -9,20 +9,21 @@ public class Player_movement : MonoBehaviour
     public float moveSpeed;
     public Vector2 movementInput;
     public Rigidbody2D rigidBody;
-    public Animator anim;
+    //public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        /*if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             anim.enabled = false;
+            anim.SetTrigger("knight_forward");
         }
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -38,7 +39,7 @@ public class Player_movement : MonoBehaviour
         {
             anim.enabled = true;
             anim.SetTrigger("knight_right");
-        }
+        }*/
     }
 
     private void FixedUpdate()

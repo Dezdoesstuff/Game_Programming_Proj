@@ -9,37 +9,23 @@ public class Player_movement : MonoBehaviour
     public float moveSpeed;
     public Vector2 movementInput;
     public Rigidbody2D rigidBody;
-    //public Animator anim;
+    public Animator anim;
+
+    public int coinsCounter;
+    public int health;
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            anim.enabled = false;
-            anim.SetTrigger("knight_forward");
-        }
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            anim.enabled = true;
-            anim.SetTrigger("knight_backward");
-        }
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            anim.enabled = true;
-            anim.SetTrigger("knight_left");
-        }
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            anim.enabled = true;
-            anim.SetTrigger("knight_right");
-        }*/
+        anim.SetFloat("Horizontal", movementInput.y);
+        anim.SetFloat("Vertical", movementInput.x);
+        anim.SetFloat("Speed", movementInput.sqrMagnitude);
     }
 
     private void FixedUpdate()
@@ -50,5 +36,14 @@ public class Player_movement : MonoBehaviour
     private void OnMove(InputValue inputValue)
     {
         movementInput = inputValue.Get<Vector2>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Coins"))
+        {
+            coinsCounter++;
+            Destroy(collision.gameObject);
+        }
     }
 }

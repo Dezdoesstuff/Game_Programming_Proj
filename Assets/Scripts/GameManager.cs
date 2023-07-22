@@ -5,9 +5,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject UI, Intro_room_choice, Titlescreen, /*GameText,*/ Ending1;
+    public GameObject UI, Choices, Intro_room_choice, Intro_elevator_choice, Titlescreen, Ending1;
     public int health, sanity;
-    public TextMeshProUGUI healthText, sanityText;
+    public TextMeshProUGUI healthText, sanityText, GameText;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,32 +19,55 @@ public class GameManager : MonoBehaviour
     {
         healthText.text = health.ToString();
         sanityText.text = sanity.ToString();
+
+        if (health <= 0)
+        {
+            Ending1.SetActive(true);
+            Choices.SetActive(false);
+            UI.SetActive(false);
+        }
+        if (sanity <= 0)
+        {
+            Ending1.SetActive(true);
+            Choices.SetActive(false);
+            UI.SetActive(false);
+        }
     }
     
     public void StartGameButton()
     {
         Titlescreen.SetActive(false);
         Intro_room_choice.SetActive(true);
-        /*GameText.SetActive(true);
-        GameText.text = "You wake up in a dark classroom.";*/
+        UI.SetActive(true);
     }
     public void EndGameButton()
     {
         Application.Quit();
     }
-    public void Choice_1()
+    public void IR_Choice_1()
     {
-        /*GameText.text = "Where is everyone?";*/
+        GameText.text = "Where is everyone?";
         sanity -= 5;
     }
-    public void Choice_2()
+    public void IR_Choice_2()
     {
-        /*GameText.text = "Damn, someone decided to rummage through my things... I only have a lighter in here.";*/
+        GameText.text = "Damn, someone decided to rummage through my things... There's only a lighter left.";
         sanity -= 5;
     }
-    public void Choice_3()
+    public void IR_Choice_3()
     {
         Intro_room_choice.SetActive(false);
+        Intro_elevator_choice.SetActive(true);
         sanity -= 5;
+    }
+    public void Ending1_choice1()
+    {
+        Choices.SetActive(true);
+        Intro_room_choice.SetActive(true);
+        UI.SetActive(true);
+    }
+    public void Ending1_choice2()
+    {
+        Application.Quit();
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
+using TMPro;
 
 public class Player_movement : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class Player_movement : MonoBehaviour
 
     public int coinsCounter;
     public int health;
+
+    public TextMeshProUGUI coinsCounterText, healthtext;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +30,8 @@ public class Player_movement : MonoBehaviour
         anim.SetFloat("Horizontal", movementInput.y);
         anim.SetFloat("Vertical", movementInput.x);
         anim.SetFloat("Speed", movementInput.sqrMagnitude);
+
+        coinsCounterText.text = coinsCounter.ToString();
     }
 
     private void FixedUpdate()
